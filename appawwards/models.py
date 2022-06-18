@@ -25,7 +25,6 @@ class Profile(models.Model):
 
 class Post(models.Model):
     sitename=models.CharField(max_length=50)
-    url = models.CharField(max_length=50)
     Description=models.CharField(max_length=800)
     image = models.FileField(upload_to='posts/')
     post_date = models.DateTimeField(auto_now=True)

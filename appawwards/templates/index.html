@@ -1,9 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <title>Blog</title>
-    </head>
-    <body>
-        <h1>Blog Home!</h1>
-    </body>
-</html>
+{% extends "base.html" %}
+{% block content%}
+
+
+<div class="container">
+    <div class="col-md-2"></div>
+    {% for post in posts %}
+    <div class="col-md-4">
+    <h2>{{ post.title }}</h2>
+    <img class='img-fluid'src="{{post.image.url}}">
+    <p> {{ post.content }}</p>
+    <p> Post Author - {{ post.author }}</p>
+    <p> Post Description - {{ post.description }}</p>
+ </div>
+    {% endfor%}
+    <div class="col-md-2"></div>
+</div>
+{% endblock%}
