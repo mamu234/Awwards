@@ -1,18 +1,9 @@
-{% extends "base.html" %}
-{% block content%}
+{% extends 'base.html' %}
 
-
-<div class="container">
-    <div class="col-md-2"></div>
+{% block content %}
     {% for post in posts %}
-    <div class="col-md-4">
-    <h2>{{ post.title }}</h2>
-    <img class='img-fluid'src="{{post.image.url}}">
-    <p> {{ post.content }}</p>
-    <p> Post Author - {{ post.author }}</p>
-    <p> Post Description - {{ post.description }}</p>
- </div>
+        <h1>{{ post.title }}</h1>
+        <p>By {{ post.author }} on {{ post.date }}
+        <p> Author{{ post.content }}</p> {{ post.author}}
     {% endfor%}
-    <div class="col-md-2"></div>
-</div>
-{% endblock%}
+{% endblock %}
