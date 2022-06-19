@@ -4,6 +4,12 @@ from .models import Post
 from django.contrib import messages
 from .forms import UserRegisterForm,UserCreationForm
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from django.contrib.sites.shortcuts import get_current_site
+from django.urls import reverse
+import json
+from django.http import JsonResponse
+from django.core.mail import EmailMessage
 
 # Create your views here.
 @login_required
@@ -25,10 +31,14 @@ def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST) 
         if form.is_valid():
+            emailval=form.clean_data.get('email')
             form.save() # Save user to Database
-            username = form.cleaned_data.get('username') # Get the username that is submitted
-            messages.success(request, f'Account created for {username}!') # Show sucess message when account is created
-            return redirect('home') # Redirect user to Homepage
-    else:
-        form = UserRegisterForm()
-    return render(request, 'register.html', {'form': form})
+            username = form.clean_data.get('username') # Get the username that is submitted
+            domain = get_current_site(request).domain
+            link=reverse('home')
+            homepage_url= 'http://'+domain+link
+            email=EmailMessage(
+                f'Hi{username},welcome',
+                f'sart you voting {homepage_url}'
+            )
+       
