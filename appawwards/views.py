@@ -1,12 +1,25 @@
+from django.http import HttpResponse
 from django.shortcuts import render,redirect
 from .models import Post
 from django.contrib import messages
-from .forms import UserRegisterForm
-# Create your views here.
+from .forms import UserRegisterForm,UserCreationForm
+from django.contrib.auth.decorators import login_required
 
+# Create your views here.
+@login_required
 def home(request):
     posts =Post.objects.all()
     return render(request,'index.html',{'posts':posts})
+
+def upload(request):
+    upload=UserCreationForm()
+    if request.method=='POST':
+        upload=UserCreationForm(request.POST,request.FILES)
+        if upload.is_valid:
+            upload.save()
+            return redirect('home')
+        else:
+            return HttpResponse('your form is wrong')
 
 def register(request):
     if request.method == 'POST':

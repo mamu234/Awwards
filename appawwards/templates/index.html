@@ -1,9 +1,12 @@
-{% extends 'base.html' %}
+<h1>posts</h1>
 
-{% block content %}
+<div class="container">
     {% for post in posts %}
+
+  
         <h1>{{ post.title }}</h1>
-        <p>By {{ post.author }} on {{ post.date }}
-        <p> Author{{ post.content }}</p> {{ post.author}}
+        <img src="https://res.cloudinary.com/dgwsgoxjd/image/upload/v1 {{post.image }}" alt="{{post.title}}">
+       <p>{{ post.description }}</p>
     {% endfor%}
-{% endblock %}
+
+</div>
