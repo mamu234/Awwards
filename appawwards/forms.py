@@ -1,16 +1,17 @@
-from django.forms import ModelForm
 from django import forms
-from .models import Post
-from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
+from . models import Post,Profile
 
-class PostCreate(forms.ModelForm):
+class NewPostForm(forms.ModelForm):
     class Meta:
-        model= Post
-        fields='__all__'
+        model = Post
+        exclude = ['user']
 
-class UserRegisterForm(UserCreationForm):
-    email = forms.EmailField()
+class UserForm(forms.ModelForm):
     class Meta:
-        model = User
-        fields = ['username', 'email', 'password1', 'password2']
+        model = Profile
+        fields = ('name','user_name','bio')
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        exclude = ['user']
