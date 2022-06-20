@@ -1,37 +1,16 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import Post
 
 
-
-tasks = ["foo", "bar", "baz"]
-
-# Create your views here.
-def index(request):
-    return render(request, "tasks/index.html", {
-        "tasks": tasks
-    })
+from django.shortcuts import render
+from .models import Post 
 
 def index(request):
     context = {
-        'posts': posts
+        'posts': Post.objects.all()
     }
-    return render(request, "blog/index.html",context)
+    return render(request,'blog/index.html', context)
 
 def about(request):
-    return HttpResponse('<h1>About</h1>')
-
-posts = [
-    {
-        'author': 'Anna',
-        'title': 'Blog post 1',
-        'content': 'First post content',
-        'date': 'August 10, 2020'
-    },
-    {
-        'author': 'Jane',
-        'title': 'Blog post 1',
-        'content': 'First post content',
-        'date': 'August 1, 2020'
-    }
-]
-
+    return render(request, 'blog/about.html', {'title': 'About'})
