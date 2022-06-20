@@ -1,5 +1,4 @@
-{%extends "base.html"%}
-{% load bootstrap4%}
+{%extends "registration/base.html"%} {% load bootstrap4 %}
 {% block content %}
 <div class="container">
   <div class="row">
@@ -16,11 +15,9 @@
         </div>
         <div class="panel-body">
 
-        <!--We have a form inside the panel body-->
-        <!--This form sends a post request to /accounts/register/-->
-          <form  action="register" method="POST">
+          <form  action="/register/" method="post">
             {% csrf_token %}
-            {{ form| crispy }}
+            {% bootstrap_form form %}
             <div class="form-group">
               <input type="submit" class="btn btn-primary btn-sm" value="Sign Up">
             </div>
@@ -28,7 +25,7 @@
             <input type="hidden" name="next" value="{{next}}">
 
           </form>
-
+          <a href="/registration/login">LOGIN</a>
         </div>
 
       </div>
