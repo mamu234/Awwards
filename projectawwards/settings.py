@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'appawwards',
     'bootstrap4',
     'crispy_forms',
+    'rest_framework'
+    
     
 ]
 

@@ -4,7 +4,7 @@ from .models import Post,Profile
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
-        fields = ['sitename', 'Technology', 'url', 'Description', 'image']
+        fields = ['sitename', 'url', 'description', 'image']
 
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:

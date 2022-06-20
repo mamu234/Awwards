@@ -18,9 +18,6 @@ def home(request):
     posts =Post.objects.all()
     return render(request,'index.html',{'posts':posts})
 
-def main(request):
-    render(request, "templates/sysapp/main.html")
-
 def upload(request):
     upload=UserCreationForm()
     if request.method=='POST':
@@ -37,7 +34,7 @@ def register(request):
         if form.is_valid():
             emailval=form.cleaned_data.get('email')
             form.save() # Save user to Database
-            username = form.cleaned_data.get('username') # Get the username that is submitted
+            username = form.clean_data.get('username') # Get the username that is submitted
             domain = get_current_site(request).domain
             link=reverse('home')
             homepage_url= 'http://'+domain+link
