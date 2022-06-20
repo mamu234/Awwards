@@ -93,7 +93,7 @@ DATABASES = {
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 LOGIN_REDIRECT ='home'
-LOGIN_URL = 'login'
+# LOGIN_URL = 'login'
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
