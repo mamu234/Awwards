@@ -1,13 +1,13 @@
-Description
-aWWWards is a web app where users submit their projects and other users get to review and rate them.The inspiration behind this project is from the awwwards app.
+## Description
+ aWWWards is a web app where users submit their projects and other users get to review and rate them.The inspiration behind this project is from the     awwwards app.
 
-User Story
+### User Story
 To view the user story, open the specs.md file.
 
-Author
+### Author
 carolyne maunda
 
-Set up instructions and installations
+### Set up instructions and installations
 Prerequisites
 python3.6
 
@@ -23,8 +23,7 @@ sudo service postgresql start
 sudo -u postgres createuser --superuser $USER
 sudo -u postgres createdb $USER
 touch .psql_history
-Installation instructions
-Clone the repo ~ git clone https://github.com/jasonmuchiri/aWWWards.git
+
 
 Activate virtual environment: python3.6 -m venv --without-pip virtual then source virtual/bin/activate
 
@@ -56,13 +55,13 @@ Run the app
 python3.6 manage.py runserver
 Open the localhost:8000 to check if the app is running successfully.
 
-Dependancies
+### Dependancies
 All the project's dependancies are found in the requirements.txt file.Open it for reference.
 
-Known bugs
+### Known bugs
 Some functionality not fully implemented
 
-Technologies used
+### Technologies used
 - python3.6
 - Django1.11
 - HTML
