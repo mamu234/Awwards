@@ -1,17 +1,14 @@
-from django.conf.urls import url
+from django.urls import path
 from . import views
-from django.conf import settings
-from django.conf.urls.static import static
+from django.contrib.auth import views as auth_views
 
-urlpatterns=[
-    url('^$',views.index,name = 'index'),
-    url(r'^new/post$', views.new_post, name='new-post'),
-    url(r'^profile/(?P<user_id>\d+)?$', views.profile, name='profile'),
-    url(r'^update/profile$', views.updateprofile, name='updateprofile'),
-    url(r'^vote/(?P<post_id>\d+)?$', views.vote, name='vote'),    
-    url(r'^search/', views.search_results, name='search_results'),
-    url(r'^api/post/$', views.PostList.as_view()),
-    url(r'^api/profile/$', views.ProfileList.as_view()),
+
+
+urlpatterns = [
+    path('',views.home, name='home'),
+    path('update/<int:post_id>',views.update_post,name='update'),
+    path('delete/<int:post_id>',views.delete_post,name='delete'),
+    path('register',(views.register), name="register"),
+    path('login/',(auth_views.LoginView.as_view(template_name='login.html')), name='login'),
+   
 ]
-if settings.DEBUG:
-    urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
