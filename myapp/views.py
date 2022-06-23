@@ -2,12 +2,12 @@ from django.shortcuts import render,redirect,get_object_or_404
 from django.http import HttpResponse, Http404,HttpResponseRedirect
 from . models import Post, Profile
 from django.contrib.auth.models import User
-from . forms import NewPostForm, UserForm, ProfileForm 
+from . forms import UserRegisterForm ,UserCreationForm 
 from django.contrib.auth.decorators import login_required
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from . models import Post, Profile
-from . serializer import PostSerializer,ProfileSerializer
+
 import datetime as dt
 
 @login_required(login_url='/accounts/login/')
@@ -34,20 +34,20 @@ def profile(request,user_id=None):
 @login_required(login_url='/accounts/login')
 def updateprofile(request):
 	if request.method == 'POST':
-		form = ProfileForm(request.POST,request.FILES, instance=request.user.profile)
+		form = UserCreationForm (request.POST,request.FILES, instance=request.user.profile)
 		if form.is_valid():
 			form.save()
 			return redirect('profile')
 
 	else:
-			form = ProfileForm()
+			form =UserCreationForm ()
 	return render(request, 'updateprofile.html',{"form":form })
 
 @login_required(login_url='/accounts/login/')
 def vote(request,post_id):
     try:
         post = Post.objects.get(id = post_id)
-    except DoesNotExist:
+    except FileNotFoundError:
         raise Http404()
     return render(request,"vote.html", {"post":post})
 
@@ -55,7 +55,7 @@ def vote(request,post_id):
 def new_post(request):
     current_user = request.user
     if request.method == 'POST':
-        form = NewPostForm(request.POST, request.FILES)
+        form = UserRegisterForm(request.POST, request.FILES)
 
         if form.is_valid():
             post = form.save(commit=False)
@@ -63,7 +63,7 @@ def new_post(request):
             post.save()
             return redirect('index')
     else:
-        form = NewPostForm()
+        form = UserRegisterForm()
     return render(request, 'new_post.html', {"form":form})
 
 def search_results(request):
@@ -79,16 +79,6 @@ def search_results(request):
         message = "You haven't searched for any term"
         return render(request, 'search.html',{"message":message})
 
-class PostList(APIView):
-    def get(self, request, format=None):
-        all_post = Post.objects.all()
-        serializers = PostSerializer(all_post, many=True)
-        return Response(serializers.data)
-
-class ProfileList(APIView):
-    def get(self, request, format=None):
-        all_profile = Post.objects.all()
-        serializers = PostSerializer(all_profile, many=True)
-        return Response(serializers.data)  
+ 
 
 
