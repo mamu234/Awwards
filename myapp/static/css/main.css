@@ -1,0 +1,32 @@
+
+
+.hello{
+    color:green;
+}
+#nbar{
+    background-color:black;
+    color:black;
+}
+.login, #site{
+    text-decoration: none;
+    color:white;
+}
+
+.login:hover, #site:hover{
+    text-decoration: none;
+    color:white;
+}
+.brand{
+    font-weight: bolder;
+}
+.account-img {
+    height: 125px;
+    width: 125px;
+}
+.nav-img{
+    height: 30px;
+    width: 30px;
+}
+body{
+    background-color:white;
+}
