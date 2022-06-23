@@ -24,7 +24,7 @@ class Profile(models.Model):
         image.save()
 
 class Post(models.Model):
-    sitename=models.CharField(max_length=50)
+    sitename=models.CharField(max_length=50,null=True)
     url = models.CharField(max_length=50)
     Description=models.CharField(max_length=800)
     image = models.FileField(upload_to='posts/')
