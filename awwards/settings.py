@@ -17,8 +17,8 @@ import cloudinary.api
 import  django_heroku
 import dj_database_url
 import os
-from dotenv import load_dotenv
 from decouple import config,Csv
+from decouple import config
 
 MODE=config("MODE",default="dev")
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -28,8 +28,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 #BASE_DIR = Path(__file__).resolve().parent.parent
 
-env_path=Path('.')/'.env'
-load_dotenv(dotenv_path=env_path)
+
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
@@ -136,7 +136,11 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
+EMAIL_USE_TLS = config('EMAIL_USE_TLS')
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_PORT = config('EMAIL_PORT')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
