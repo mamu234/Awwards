@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'awwards',
     'bootstrap4',
     'crispy_forms', 
+    'star_ratings',
+    
 ]
 
 MIDDLEWARE = [

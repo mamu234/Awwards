@@ -2,31 +2,41 @@ from django.shortcuts import render,redirect
 from .forms import *
 from .forms import UserRegisterForm, UserCreationForm
 from django.contrib import messages
-from django.http import HttpResponse
-from . models import Post, Profile
-
+from django.http import Http404, HttpResponse
+from . models import Post, Profile,Rating
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def home(request):
     return render(request, "index.html")
 
-def register(request):
-    if request.method == 'POST':
-        form =UserRegisterForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            messages.success(request,f"You have succesfully created an account. Proceed to Login")
-            return redirect('login')
-
-
-
-    else:
-        form = UserRegisterForm()
-    context = {
-        'form':form
+def main_view(request):
+    obj =Rating.objects.filter(score =1).order_by("?").first()
+    context ={
+        'object':obj
     }
-    return render(request,"sign-up.html",context)
+    return render(request,'index.html',context)
+    
+   
+    
+
+# def register(request):
+#     if request.method == 'POST':
+#         form =UserRegisterForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             username = form.cleaned_data.get('username')
+#             messages.success(request,f"You have succesfully created an account. Proceed to Login")
+#             return redirect('login')
+
+
+
+    # else:
+    #     form = UserRegisterForm()
+    # context = {
+    #     'form':form
+    # }
+    # return render(request,"sign-up.html",context)
   
        
 def upload(request):
@@ -93,13 +103,22 @@ def search_results(request):
 def new_post(request):
     current_user = request.user
     if request.method == 'POST':
-        form = UserCreationForm(request.POST, request.FILES)
+        form = UploadpostForm(request.POST, request.FILES)
 
         if form.is_valid():
             post = form.save(commit=False)
             post.user = current_user
             post.save()
-            return redirect('new_post')
+            return redirect('home')
     else:
-        form = UserCreationForm()
-    return render(request, 'new_post.html', {"form":form})
+        form = UploadpostForm()
+    return render(request, 'new_post.html', { "form":form})
+
+@login_required(login_url='registration/login/')
+def vote(request,post_id):
+    try:
+        post = Post.objects.get(id = post_id)
+    except Post.DoesNotExist:
+        raise Http404()
+    return render(request,"vote.html", {"post":post})
+
