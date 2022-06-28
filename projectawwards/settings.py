@@ -27,10 +27,9 @@ SECRET_KEY = 'django-insecure-0svb4v4qh*ax8w0tako)7*66=s1owwn*+0a@*yjg@=na-=qp_8
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['awwards-a.herokuapp.com','127.0.0.1']
 
 
-# Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -137,6 +136,10 @@ LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = ""
 
 
+
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 MEDIA_URL = '/media/'
